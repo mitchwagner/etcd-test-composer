@@ -70,3 +70,15 @@ COPY ./go-delete-keys/serial_driver_delete_keys.go ./serial_driver_delete_keys.g
 
 # Building go executable and putting it in Test Composer directory
 RUN go build -o /opt/antithesis/test/v1/main/serial_driver_delete_keys -race
+
+# Copying go script and building an executable into Test Composer directory
+WORKDIR /opt/antithesis/go-test-sequential-consistency
+
+COPY ./go-test-sequential-consistency/go.mod ./go.mod
+COPY ./go-test-sequential-consistency/go.sum ./go.sum
+COPY ./go-test-sequential-consistency/serial_driver_test_sequential_consistency.go ./serial_driver_test_serializability.go
+
+# Building go executable and putting it in Test Composer directory
+RUN go build -o /opt/antithesis/test/v1/main/serial_driver_test_sequential_consistency -race
+
+ENV ANTITHESIS_SDK_LOCAL_OUTPUT="/home/ubuntu/foo"
