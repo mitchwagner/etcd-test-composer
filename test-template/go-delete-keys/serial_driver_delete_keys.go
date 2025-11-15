@@ -77,6 +77,8 @@ func DeleteKeys() {
 			deleted_keys = append(deleted_keys, k)
 		}
 	}
+	assert.Sometimes(len(deleted_keys) == half, "Every delete request can successfully complete", map[string]interface{}{"actual": len(deleted_keys), "attempted": half})
+
 	cli.Close()
 
 	// Connect to a new etcd node
